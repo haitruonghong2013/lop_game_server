@@ -1,0 +1,12 @@
+{
+	"name": "LOP",
+	"description": "LOP web",
+	"version": "0.0.3",
+	"dependencies": {
+		"express": "3.x",
+		"socket.io": "*",
+		"request": "*",
+		"pg": "*",
+        "clim":"*"
+	}
+}
