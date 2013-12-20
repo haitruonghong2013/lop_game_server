@@ -1,4 +1,4 @@
-var utils = require('./Utils.js');
+var utils = require('./../common/Utils.js');
 var logics = require('./Logic.js');
 
 var ServerAdapter =

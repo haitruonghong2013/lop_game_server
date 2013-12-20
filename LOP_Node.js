@@ -13,7 +13,7 @@ var express = require('express');
 var console = require("clim")();
 
 // var app = express()
-var mainModule = require('../app.js');
+var mainModule = require('./app.js');
 var app = mainModule.app
   , http = mainModule.http
   , server = http.createServer(app)
@@ -21,9 +21,9 @@ var app = mainModule.app
   , io = require('socket.io').listen(server);
 
 io.set('log level',3);
-var logics = require('./Logic.js');
-var serverAdapter = require('./ServerAdapter.js');
-var serverManager = require('./ServerManager.js');
+var logics = require('./app/logic/Logic.js');
+var serverAdapter = require('./app/logic/ServerAdapter.js');
+var serverManager = require('./app/logic/ServerManager.js');
 
 var lop_port = process.env.PORT || 7998;
 console.log('The server is going to start at port ' + lop_port);

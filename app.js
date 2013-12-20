@@ -20,7 +20,7 @@ var pg = exports.pg = require('pg');
 // var conString = exports.conString = "postgres://master:12345@localhost/LOP";
 var conString = exports.conString = process.env.DATABASE_URL ? process.env.DATABASE_URL : "postgres://master:12345@localhost/LOP";
 console.log('connection string ' + conString);
-var lopIo = require('./node_modules/LOP_Node.js');
+var lopIo = require('./LOP_Node.js');
 
 var chars = exports.chars = {};
 

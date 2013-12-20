@@ -1,16 +1,16 @@
 //Constants
-var Model = exports.Model = require('../app/constant/model.js').Model;
-var Character = exports.Character = require('../app/constant/character.js').Character;
-var Command = exports.Command = require('../app/constant/command.js').Command;
-var BattleCommand = exports.BattleCommand = require('../app/model/battleCommand.js').BattleCommand;
+var Model = exports.Model = require('../constant/model.js').Model;
+var Character = exports.Character = require('../constant/character.js').Character;
+var Command = exports.Command = require('../constant/command.js').Command;
+var BattleCommand = exports.BattleCommand = require('../model/battleCommand.js').BattleCommand;
 
 //Model
-var BattleLogic = exports.BattleLogic = require('../app/model/battleCommand.js').BattleLogic;
-var BattleCommandEntity = require('../app/model/battleCommand.js');
-var BattleModelEntity = require('../app/model/battleModel.js');
-var CharacterEntity = require('../app/model/character.js');
-var CommandEntity = require('../app/model/command.js');
-var ScoreEntity = require('../app/model/score.js');
+var BattleLogic = exports.BattleLogic = require('../model/battleCommand.js').BattleLogic;
+var BattleCommandEntity = require('../model/battleCommand.js');
+var BattleModelEntity = require('../model/battleModel.js');
+var CharacterEntity = require('../model/character.js');
+var CommandEntity = require('../model/command.js');
+var ScoreEntity = require('../model/score.js');
 
 
 
