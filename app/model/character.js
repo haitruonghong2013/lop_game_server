@@ -1,4 +1,6 @@
 var Character = require('../constant/character.js').Character;
+
+//Character Class
 var createCharacter = exports.createCharacter = function()
 {
     var createCharacterObj = {};

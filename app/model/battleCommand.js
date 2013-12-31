@@ -14,6 +14,8 @@ var BattleCommand = exports.BattleCommand =
     COMMAND_ATTACK_1		: 0,
     COMMAND_ATTACK_2		: 1,
     COMMAND_ATTACK_3		: 2,
+
+//    Restore blood
     COMMAND_HEAL			: 3,
     COMMAND_ENERGY_UP		: 4,
     COMMAND_MONEY			: 5,

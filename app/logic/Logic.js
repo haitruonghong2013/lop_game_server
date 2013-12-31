@@ -31,6 +31,13 @@ var createScore = exports.createScore =  function(){
     return ScoreEntity.createScore();
 }
 
+/*
+Calculation for battle
+    @param invoker :{Character}
+    @param taker :{Character}
+    @param command :{BattleCommand}
+ */
+
 
 var battleCalculation = function( invoker, taker, command )
 {
@@ -199,6 +206,7 @@ var battleCalculation = function( invoker, taker, command )
 				invokerDamage = -command.power * BattleLogic.HP_COMBO_FILL_RATE;
 			}
 			break;
+        //Restore Mana but current not use
 		case BattleCommand.COMMAND_ENERGY_UP:
 			// if ( rank > 0 )
 			// {
@@ -234,6 +242,7 @@ var battleCalculation = function( invoker, taker, command )
 	{
 		if ( takerDamage > 0 )
 		{
+//            Damage decrease a half
 			takerDamage >>= 1;
 			// Gdx.app.log( "BattleLogic:battleCalculation()", "Target guarded, damage half" );
 		}

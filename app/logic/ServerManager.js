@@ -31,9 +31,9 @@ var createServerManager = exports.createServerManager = function( sock, info )
 			createServerManagerObj.socket.emit( 'sendModel', model );
 		},
 
-		sendStart : function( battleModel )
+		sendStart : function( battleModel,theme_id )
 		{
-			createServerManagerObj.socket.emit( 'sendStart', battleModel );
+			createServerManagerObj.socket.emit( 'sendStart', battleModel,theme_id);
 		},
 
 		setServerCallBack : function( callback )
@@ -108,6 +108,7 @@ var createServerManager = exports.createServerManager = function( sock, info )
 		}
 	});
 
+//    when player click 5 skills on game client
 	createServerManagerObj.socket.on('clientActiveSkill', function( playerId, command )
 	{
 		// if(!createServerManagerObj.clientInfo['Playing'])
@@ -121,7 +122,7 @@ var createServerManager = exports.createServerManager = function( sock, info )
 			createServerManagerObj.callback.clientActiveSkill(playerId, JSON.parse( command ) );
 		}
 	});
-
+    //    when player done an action, emit 'clientNotifySkillDone'
 	createServerManagerObj.socket.on('clientNotifySkillDone', function( playerId, finishCommand )
 	{
 		// if(!createServerManagerObj.clientInfo['Playing'])
@@ -135,8 +136,8 @@ var createServerManager = exports.createServerManager = function( sock, info )
 			createServerManagerObj.callback.clientNotifySkillDone( playerId, JSON.parse( finishCommand ) );
 		}
 	});
-
-	createServerManagerObj.socket.on('clientReady', function( playerId )
+    //When init game board ready to play
+	createServerManagerObj.socket.on('clientReady', function( playerId, theme_id )
 	{
 		// console.log('player ' + playerId + ' ready');
 		// if(!createServerManagerObj.clientInfo['Playing'])
@@ -147,10 +148,11 @@ var createServerManager = exports.createServerManager = function( sock, info )
 
 		if(createServerManagerObj.callback)
 		{
-			createServerManagerObj.callback.clientReady( playerId );
+			createServerManagerObj.callback.clientReady( playerId,theme_id );
 		}
 	});
 
+    //When ??
 	createServerManagerObj.socket.on('clientRequestNextSkill', function( playerId )
 	{
 		// if(!createServerManagerObj.clientInfo['Playing'])
@@ -165,6 +167,9 @@ var createServerManager = exports.createServerManager = function( sock, info )
 		}
 	});
 
+    //When :
+    //  - Enough gems for execute an action
+    //  - Eat blood gems or money gems
 	createServerManagerObj.socket.on('clientSendGems', function( playerId, commands )
 	{
 		// if(!createServerManagerObj.clientInfo['Playing'])
@@ -179,6 +184,7 @@ var createServerManager = exports.createServerManager = function( sock, info )
 		}
 	});
 
+    //When player want to loose game
 	createServerManagerObj.socket.on('clientSuicide', function( playerId )
 	{
 		// if(!createServerManagerObj.clientInfo['Playing'])

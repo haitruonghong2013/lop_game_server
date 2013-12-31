@@ -284,6 +284,8 @@ io.sockets.on('connection', function (socket) {
 			console.log('Player(s) is/are playing... ');
 			return;
 		}
+
+        //update character attributes
 		var c1 = clients[myCharName];
 		var c2 = clients[oppCharName];
 
@@ -299,6 +301,7 @@ io.sockets.on('connection', function (socket) {
 		c2['playerId'] = 2;
 		c2['PlayWith'] = myCharName;
 
+        //two start play sockets need remove from lobby room
 		socketsList[myCharName].leave('lobby');
 		socketsList[oppCharName].leave('lobby');
 
@@ -307,6 +310,7 @@ io.sockets.on('connection', function (socket) {
 		socketsList[oppCharName].join(myCharName);
 		socketsList[oppCharName].join(oppCharName);
 
+        //Notify to all player sockets that two users out of lobby room
 		io.sockets.in('lobby').emit('clientdis', c1);
 		io.sockets.in('lobby').emit('clientdis', c2);
 
@@ -314,6 +318,7 @@ io.sockets.on('connection', function (socket) {
 		var opp = serverManager.createServerManager(socketsList[oppCharName], c2);
 		var battleModel = logics.createBattleModel();
 
+        //update character 1 attributes
 		var char1 = battleModel.character1;
 		char1.name = myCharName;
 		char1.maxHp = c1.hp;
@@ -328,6 +333,7 @@ io.sockets.on('connection', function (socket) {
 		char1.money = 0;
 		char1.race = c1.Race;
 
+        //update character 2 attributes
 		var char2 = battleModel.character2;
 		char2.name = oppCharName;
 		char2.maxHp = c2.hp;

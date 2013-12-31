@@ -1,6 +1,10 @@
 var CharacterEntity = require('./character.js');
 /*
  createBattleModel
+ BattleModel{
+    character1:{Character},
+    character2:{Character}
+ }
  */
 
 var createBattleModel = exports.createBattleModel = function()

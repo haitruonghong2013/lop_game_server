@@ -25,14 +25,15 @@ var ServerAdapter =
 
 /*
  fromPlayerX is callback object hold method
- @param {battleModel}
- @param {fromPlayer1}
- @param {fromPlayer2}
+ @param battleModel: {battleModel}
+ @param fromPlayer1: {ServerManager}
+ @param fromPlayer2: {ServerManager}
  */
 
 var createServerAdapter = exports.createServerAdapter = function(battleModel, fromPlayer1, fromPlayer2)
 {
 	var createServerAdapterObj = {};
+    createServerAdapterObj.theme_id = '';
 	createServerAdapterObj.battleModel = battleModel;
 
 	createServerAdapterObj.player1commands = utils.newLinkedList();
@@ -141,10 +142,10 @@ var createServerAdapter = exports.createServerAdapter = function(battleModel, fr
 			createServerAdapterObj.fromPlayer2.sendGameOver( logics.BattleCommand.PLAYER_2, score2 );
 		},
 
-		gameStart : function( battleModel )
+		gameStart : function( battleModel,theme_id )
 		{
-			createServerAdapterObj.fromPlayer2.sendStart( battleModel );
-			createServerAdapterObj.fromPlayer1.sendStart( battleModel );
+			createServerAdapterObj.fromPlayer2.sendStart( battleModel,theme_id );
+			createServerAdapterObj.fromPlayer1.sendStart( battleModel,theme_id );
 		},
 
 		gotNextSkill : function( battleCommand )
@@ -168,10 +169,10 @@ var createServerAdapter = exports.createServerAdapter = function(battleModel, fr
 			createServerAdapterObj.fromPlayer1.sendGameOver( logics.BattleCommand.PLAYER_2, score2 );
 		},
 
-		gameStart : function( battleModel )
+		gameStart : function( battleModel,theme_id )
 		{
-			createServerAdapterObj.fromPlayer1.sendStart( battleModel );
-			createServerAdapterObj.fromPlayer2.sendStart( battleModel );
+			createServerAdapterObj.fromPlayer1.sendStart( battleModel,theme_id );
+			createServerAdapterObj.fromPlayer2.sendStart( battleModel,theme_id );
 		},
 
 		gotNextSkill : function( battleCommand )
@@ -235,9 +236,9 @@ var createServerAdapter = exports.createServerAdapter = function(battleModel, fr
 			createServerAdapterObj.fromPlayer2.sendPauseGame( playerId, isPause );
 		},
 
-		clientReady : function( playerId )
+		clientReady : function( playerId,theme_id )
 		{
-			createServerAdapterObj.ready( playerId );
+			createServerAdapterObj.ready( playerId,theme_id );
 		},
 
 		clientRequestNextSkill : function( playerId )
@@ -413,8 +414,8 @@ var createServerAdapter = exports.createServerAdapter = function(battleModel, fr
 			{
 				console.log( 'LocalAdapter:commitNewSkill(): unknown player ' + playerId );
 			}
-			createServerAdapterObj.serverAdapterProcess();
-			return false;
+//			createServerAdapterObj.serverAdapterProcess();
+//			return false;
 		}
 
 		createServerAdapterObj.serverAdapterProcess();
@@ -543,7 +544,9 @@ var createServerAdapter = exports.createServerAdapter = function(battleModel, fr
 	createServerAdapterObj.lastUpdate = -1;
 	createServerAdapterObj.serverAdapterProcess = function( )
 	{
+        //time duration for a loop game, game loop = 60 fps
 		var delta = 0.017;
+
 		if(createServerAdapterObj.lastUpdate > 0)
 		{
 			var n = Date.now();
@@ -582,9 +585,12 @@ var createServerAdapter = exports.createServerAdapter = function(battleModel, fr
 		}
 	};
 
-	createServerAdapterObj.ready = function( playerId )
+	createServerAdapterObj.ready = function( playerId, theme_id )
 	{
-		console.log( 'ServerAdapter:ready(): id is ready: ' + playerId );
+		console.log( 'ServerAdapter:ready(): id is ready: ' + playerId+ "theme id is "+theme_id);
+        if (theme_id != null && theme_id != ''){
+            createServerAdapterObj.theme_id =  theme_id;
+        }
 		if ( playerId == logics.BattleCommand.PLAYER_1 )
 		{
 			createServerAdapterObj.p1Ready = true;
@@ -599,12 +605,12 @@ var createServerAdapter = exports.createServerAdapter = function(battleModel, fr
 		{
 			if ( createServerAdapterObj.adapterCallBack1 != null )
 			{
-				createServerAdapterObj.adapterCallBack1.gameStart( createServerAdapterObj.battleModel );
+				createServerAdapterObj.adapterCallBack1.gameStart( createServerAdapterObj.battleModel,createServerAdapterObj.theme_id );
 			}
 
 			if ( createServerAdapterObj.adapterCallBack2 != null )
 			{
-				createServerAdapterObj.adapterCallBack2.gameStart( createServerAdapterObj.battleModel );
+				createServerAdapterObj.adapterCallBack2.gameStart( createServerAdapterObj.battleModel,createServerAdapterObj.theme_id );
 			}
 		}
 

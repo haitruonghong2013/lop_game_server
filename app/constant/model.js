@@ -3,6 +3,8 @@ var Model = exports.Model =
 {
     EMPTY_PIECE_ID			: 0,
     RED_PIECE_ID			: 1,
+
+    //Restore blood
     GREEN_PIECE_ID			: 2,
     YELLOW_PIECE_ID			: 3,
     PURPLE_PIECE_ID			: 4,
